@@ -189,7 +189,7 @@ one using the CLI:
 ```bash
 # Follow the interactive serviceaccount creation process. This will create
 # a file that contains the credentials on your system
-rhoas service-account create --file-format env
+rhoas service-account create --file-format env --short-description $USER
 
 # Make sure to keep the resulting credentials file safe!
 ```
