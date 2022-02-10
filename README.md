@@ -37,10 +37,10 @@ rhoas login
 rhoas kafka create knative-demo
 
 # Set the context for future commands to operate on knative-demo
-rhoas kafka use knative-demo
+rhoas kafka use --name knative-demo
 
 # Create a topic named "shots" with 5 partitions
-rhoas kafka topic create shots --partitions 5
+rhoas kafka topic create --name shots --partitions 5
 ```
 
 If you'd rather use the UI, head over to
@@ -189,7 +189,7 @@ one using the CLI:
 ```bash
 # Follow the interactive serviceaccount creation process. This will create
 # a file that contains the credentials on your system
-rhoas serviceaccount create --file-format env --name $USER
+rhoas service-account create --file-format env
 
 # Make sure to keep the resulting credentials file safe!
 ```
@@ -204,7 +204,7 @@ Start a Kafkacat session:
 ```bash
 export KAFKA_SVC_USERNAME=$CLIENT_ID_FROM_SERVICEACCOUNT
 export KAFKA_SVC_PASSWORD=$CLIENT_SECRET_FROM_SERVICEACCOUNT
-export KAFKA_BOOTSTRAP_URL=$(rhoas kafka describe | jq .bootstrapServerHost -r)
+export KAFKA_BOOTSTRAP_URL=$(rhoas kafka describe | jq .bootstrap_server_host -r)
 export TOPIC=shots
 
 kafkacat -t $TOPIC -b $KAFKA_BOOTSTRAP_URL \
@@ -235,7 +235,7 @@ npm v6:
 ```bash
 export KAFKACONNECTION_USER=$CLIENT_ID_FROM_SERVICEACCOUNT
 export KAFKACONNECTION_PASSWORD=$CLIENT_SECRET_FROM_SERVICEACCOUNT
-export KAFKACONNECTION_BOOTSTRAPSERVERS=$(rhoas kafka describe | jq .bootstrapServerHost -r)
+export KAFKACONNECTION_BOOTSTRAPSERVERS=$(rhoas kafka describe | jq .bootstrap_server_host -r)
 
 cd producer
 npm install
